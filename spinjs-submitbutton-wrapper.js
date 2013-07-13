@@ -37,15 +37,32 @@
 		wrapper.appendChild(element);
 
 		var button_height = element.offsetHeight;
-		var number_of_lines = Math.floor(button_height/4);
+		var button_width  = element.offsetWidth;
+		var number_of_lines = Math.floor(button_height/5);
 		if(number_of_lines < 9){
 			number_of_lines = 9
+		} else if(number_of_lines > 17){
+			number_of_lines = 17;
 		}
+
+		var width = Math.ceil(button_height/8);
+		if(width > 4){
+			width = 4;
+		}
+
+		var length = (button_height/10);
+		var radius = (button_height/5);
+
+		if((radius * 2) >= (button_width - 10)){
+			radius = (button_width - 10)/4;
+			length -= 5;
+		}
+
 		var default_options = {
-			radius: (button_height/10),
-			length: (button_height/10),
+			radius: radius,
+			length: length,
 			lines: 	number_of_lines,
-			width: 	Math.ceil(button_height/8),
+			width: 	width,
 			color: text_color
 		}
 
