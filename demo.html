@@ -9,7 +9,9 @@
 	<script type="text/javascript">
 	Gator(document).on('click', 'input[type=submit]', function(e) {
     e.preventDefault();
-    console.log(SubmitButtonWrapper.start(this));
+    if(!this.classList.contains("custom-spinner")){
+    	var spinner = SubmitButtonWrapper.start(this);
+    }
 	});
 
 	Gator(document).on('click', '#traditional', function(e){
@@ -21,8 +23,17 @@
 			qwery('input[type=submit]')[i].click();
 		};
 	})
+
+	Gator(document).on('click', '#nostyle', function(e) {
+    e.preventDefault();
+  	var spinner = SubmitButtonWrapper.start(this, {color: 'purple', radius: 3});
+	});
 	</script>
 	<style type="text/css">
+		input[type=submit]{
+			-webkit-appearance: none;
+		}
+
 		#traditional{
 			width: 500px;
 			background: blue;
@@ -33,22 +44,25 @@
 			margin: 10px;
 			background: green;
 			color: yellow;
-			padding: 10px;
+			width: 25px;
+			height: 50px;
 		}
 
 		#medium-styled{
 			margin: 10px;
 			background: green;
 			color: yellow;
-			padding: 20px;
+			width: 50px;
+			height: 100px;
 		}
 
 		#large-styled{
-			margin: 10px;
-			background: green;
-			color: yellow;
-			width: 100px;
-			height: 200px;
+			background: none repeat scroll 0 0 #333333;
+	    border: 1px solid #333333;
+	    border-radius: 5px 5px 5px 5px;
+	    color: #EEEEEE;
+	    font-size: 1.25em;
+	    padding: 0.75em;
 		}
 	</style>
 </head>
@@ -56,7 +70,7 @@
 	<h1>Small</h1>
 		<h2>Unstyled</h2>
 		<form>
-			<input type='text'><input type="submit">
+			<input type='text'><input id='nostyle' class="custom-spinner" type="submit">
 		</form>
 
 		<h2>Inline Styles</h2>
