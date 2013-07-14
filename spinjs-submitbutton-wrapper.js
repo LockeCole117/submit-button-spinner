@@ -67,7 +67,7 @@
 			color: text_color
 		}
 
-		return Spinner(merge(default_options, options)).spin(wrapper);
+		Spinner(merge(default_options, options)).spin(wrapper);
 	}
 
 	function stopSpinner(element){
