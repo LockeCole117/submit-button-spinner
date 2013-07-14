@@ -26,9 +26,10 @@
 		var parent = element.parentNode;
 		var wrapper = document.createElement('div');
 		wrapper.style.display='inline-block';
+		wrapper.setAttribute('data-is-submit-wrapper', 1);
 
 		var text_color = getStyle(element, 'color');
-		element.text_color = text_color;
+		element.setAttribute('data-text-color', text_color);
 		element.style.color='transparent'
 
 		// set the wrapper as child (instead of the element)
@@ -69,5 +70,16 @@
 		return Spinner(merge(default_options, options)).spin(wrapper);
 	}
 
-	SubmitButtonWrapper = { start : startSpinner }
+	function stopSpinner(element){
+		var wrapper = element.parentNode;
+		var text_color = element.getAttribute('data-text-color');
+		if(wrapper.getAttribute('data-is-submit-wrapper') !== null){
+			var parent 	= wrapper.parentNode;
+			// set the element as child (instead of the wrapper)
+			parent.replaceChild(element, wrapper);
+		}
+		element.style.color = text_color;
+	}
+
+	SubmitButtonWrapper = { startSpinner : startSpinner, stopSpinner : stopSpinner }
 })();
