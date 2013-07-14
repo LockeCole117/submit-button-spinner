@@ -10,7 +10,7 @@
 	Gator(document).on('click', 'input[type=submit]', function(e) {
     e.preventDefault();
     if(!this.classList.contains("custom-spinner")){
-    	var spinner = SubmitButtonWrapper.start(this);
+    	var spinner = SubmitButtonWrapper.startSpinner(this);
     }
 	});
 
@@ -26,8 +26,15 @@
 
 	Gator(document).on('click', '#nostyle', function(e) {
     e.preventDefault();
-  	var spinner = SubmitButtonWrapper.start(this, {color: 'purple', radius: 3});
+  	var spinner = SubmitButtonWrapper.startSpinner(this, {color: 'purple', radius: 3});
 	});
+
+
+	function stopAllSpinners(){
+		for (var i = qwery('input[type=submit]').length - 1; i >= 0; i--) {
+			SubmitButtonWrapper.stopSpinner(qwery('input[type=submit]')[i]);
+		};
+	}
 	</script>
 	<style type="text/css">
 		input[type=submit]{
@@ -67,6 +74,7 @@
 	</style>
 </head>
 <body>
+	<h1 onclick='stopAllSpinners();'>STAHP</h1>
 	<h1>Small</h1>
 		<h2>Unstyled</h2>
 		<form>
